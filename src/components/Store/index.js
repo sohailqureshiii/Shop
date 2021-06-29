@@ -13,21 +13,21 @@ const Store = (props) => {
                    <div className="Cover-wrapper-300 ProjectCoverNeue-wrapper-27j e2e-ProjectCoverNeue-wrapper">
                      <div className="Cover-content-2R2">
                        <div className="DominantColor-dominantColor-2PM"></div>
-                       {/* <img
+                       <img
                            sizes="404px"
                            style={{ padding: "10px" }}
-                           src={product.productPictures[0].img}
+                           src={"https://rtlimages.apple.com/cmc/dieter/store/16_9/R325.png?resize=1440:806&output-format=jpg&output-quality=85&interpolation=progressive-bicubic"}
                            alt="Children's Day - ''SEE ME&quot;"
                            loading="lazy"
                            class="ProjectCoverNeue-image-1MZ js-cover-image"
-                         ></img> */}
+                         ></img>
                        <div className="ProjectCoverNeue-controlsAndPrivacyContainer-20r"></div>
                      </div>
                    </div>
                  </div>
                  {/* /////// */}  
                    <Link 
-                  //  to={`/${store._id}/store`} key={store._id}
+                   to='/:storeId/store'
                    >
                  <div style={{ padding: "10px" }}>
                    <div className="Cover-overlay-28e Cover-showOnHover-Ks- Cover-transitionDone-22y">
@@ -36,7 +36,7 @@ const Store = (props) => {
                      <span className="ProjectCoverNeue-ownersContainer-3Go">
                        <div className="Owners-root-3c9 Owners-dark-1Vh Owners-overflowText-3Yn ProjectCoverNeue-owners-1qo">
                          <span className="js-mini-profile Owners-ownerAndAvatar-1d5">
-                           <a className="Owners-owner-2lB e2e-Owner-user-link">
+                           <a className="Owners-owner-2lB e2e-Owner-user-link" style={{color:'black'}}>
                             Apple Store
                            </a>
                          </span>
@@ -46,10 +46,10 @@ const Store = (props) => {
                        <div className="Product__priceFlex">
                          <div
                            className="Owners-owner-2lB e2e-Owner-user-link"
-                           style={{ marginBottom: "20px" }}
+                           style={{ marginBottom: "20px",color:'black' }}
                            // onClick={() => showProductDetailsModal(product)}
                          >
-                           Walk in Store
+                          Follow Store
                          </div>
                        </div>
                      </div>

@@ -18,6 +18,9 @@ const ExploreStore = (props) => {
       <div style={{ padding: "30px", paddingTop: "30px" }}>
         <div className="Galleries-covers-ihH Galleries-grid-1Bv Galleries-header-14v">
           <Store/>
+          <Store/>
+          <Store/>
+          <Store/>
         </div>
       </div>
     );

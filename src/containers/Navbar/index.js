@@ -8,9 +8,6 @@ import Storeicon from "../../img/shop.png";
 import Homeicon from "../../img/home.png";
 import Wishlisticon from "../../img/heart.png";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin, signout, signup as _signup } from "../../actions";
-import Signin from "../../components/Signin";
-import Signup from "../../components/Sign up";
 
 /**
  * @author
@@ -19,48 +16,7 @@ import Signup from "../../components/Sign up";
 
 const Navigationbar = (props) => {
   const [isMobile, setIsMobile] = useState(false);
-
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [signup, setSignup] = useState(false);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  const [showSignupModal, setShowSignupModal] = useState(false);
-
-  const userSignup = () => {
-    const user = { firstName, lastName, email, password };
-    if (
-      firstName === "" ||
-      lastName === "" ||
-      email === "" ||
-      password === ""
-    ) {
-      return;
-    }
-
-    dispatch(_signup(user));
-  };
-
-  const login = () => {
-    if (signup) {
-      userSignup();
-    } else {
-      dispatch(userLogin({ email, password }));
-    }
-  };
-
-  const logout = () => {
-    dispatch(signout());
-  };
-
-  useEffect(() => {
-    if (auth.authenticate) {
-      setShowLoginModal(false);
-    }
-  }, [auth.authenticate]);
 
   const renderLoggedInMenu = () => {
     return (
@@ -68,11 +24,8 @@ const Navigationbar = (props) => {
         menu={
           <div
             style={{ marginLeft: 10 }}
-            onClick={() => {
-              setShowLoginModal(false);
-            }}
           >
-            <a href="/myprofile">
+            <Link href="/myprofile">
               <img
                 src={Profilepiclogo}
                 style={{
@@ -83,8 +36,8 @@ const Navigationbar = (props) => {
                 }}
                 alt="Shopisthan Logo"
               />
-              <span style={{ fontSize: 15 }}> {auth.user.firstName}</span>
-            </a>
+              <span style={{ fontSize: 15 }}> Sohail</span>
+            </Link>
           </div>
         }
         menus={[
@@ -94,9 +47,6 @@ const Navigationbar = (props) => {
             label: "Orders",
             href: "/account/orders",
             icon: null,
-            // onClick: () => {
-            //   !auth.authenticate && setLoginModal(true);
-            // },
           },
 
           { label: "Wishlist", href: "", icon: null },
@@ -105,7 +55,7 @@ const Navigationbar = (props) => {
           { label: "Rewards", href: "", icon: null },
           { label: "Gift Cards", href: "", icon: null },
           { label: "Notifications", href: "", icon: null },
-          { label: "Logout", href: "", icon: null, onClick: logout },
+          { label: "Logout", href: "", icon: null,  },
         ]}
       />
     );
@@ -115,34 +65,31 @@ const Navigationbar = (props) => {
       <DropdownMenu
         menu={
           <li className="PrimaryNav-loggedOutOption-3xV">
-            <a
-              onClick={() => {
-                setShowLoginModal(true);
-              }}
+            <Link
             >
               <div className="PrimaryNav-a11yButtonWrap-23Z">
-                <button className="Btn-button-BGn Btn-primary-1H3 Btn-normal-hI4 js-adobeid-signup e2e-PrimaryNav-signup PrimaryNav-a11yButton-2Cl">
+              <Link to='/Signin'> 
+              <button className="Btn-button-BGn Btn-primary-1H3 Btn-normal-hI4 js-adobeid-signup e2e-PrimaryNav-signup PrimaryNav-a11yButton-2Cl">
                   <div className="Btn-labelWrapper-1jS">
                     <div className="Btn-label-1Zf e2e-Btn-label"> Log In</div>
                   </div>
                 </button>
+              </Link>
                 <span className="PrimaryNav-a11yButtonHelper-3Vx"></span>
               </div>
-            </a>
+            </Link>
           </li>
         }
         menus={[{ label: "Shopisthan About us", href: "", icon: null }]}
         firstMenu={
           <div className="firstmenu">
             <span>New Customer?</span>
-            <a
-              onClick={() => {
-                setShowSignupModal(true);
-              }}
+            <Link
               style={{ color: "#2874f0" }}
+              to='/Signup'
             >
               Sign Up
-            </a>
+            </Link>
           </div>
         }
       />
@@ -152,10 +99,6 @@ const Navigationbar = (props) => {
   return (
     <>
       <nav className="navbar">
-        <Signin
-          show={showLoginModal}
-          handleclose={() => setShowLoginModal(false)}
-        ></Signin>
         <h3 className="logo">
           <li className="PrimaryNav-coreNavigationItem-236 PrimaryNav-home-2zH">
             <a href="/" className="PrimaryNav-coreNavigationLink-2uv">
@@ -167,7 +110,6 @@ const Navigationbar = (props) => {
         </h3>
         <ul
           className={isMobile ? "nav-links-mobile" : "nav-links"}
-          onClick={() => setIsMobile(false)}
         >
           <Link className="cart" to="/">
             <a className="PrimaryNav-coreNavigationLink-2uv e2e-Nav-jobs">
@@ -220,7 +162,7 @@ const Navigationbar = (props) => {
         </ul>
         <div className="PrimaryNav-signup-Yf6">
           <ul className="PrimaryNav-loggedOutOptions-1SQ">
-            {auth.authenticate ? renderLoggedInMenu() : renderNonLoggedInMenu()}
+            { renderNonLoggedInMenu() }
           </ul>
         </div>
         <button
@@ -234,10 +176,6 @@ const Navigationbar = (props) => {
           )}
         </button>
       </nav>
-      <Signup
-        show={showSignupModal}
-        handleclose={() => setShowSignupModal(false)}
-      />
     </>
   );
 };
